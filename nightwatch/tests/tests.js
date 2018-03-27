@@ -1,3 +1,7 @@
+const functions = require('../test_assets/functions')
+const selector = require('../test_assets/selectors')
+const value = require('../test_assets/data')
+
 module.exports = {
     beforeEach: browser => {
         browser.url('http://localhost:3000')
@@ -6,22 +10,13 @@ module.exports = {
         browser.end()
     },
 
-    'Even and Odds basic functionality': browser => {
-        browser
-            .waitForElementVisible('input[name="evenOddInput"]',3000)
-            .setValue('input[name="evenOddInput"]', "2,91,273,479,36,12,2")
-            .click('button[name="evenOddButton"]')
-            .expect.element('span[name="evenResults"]').text.to.equal("Evens: [2,36,12,2]")
-        browser
-            .expect.element('span[name="oddResults"]').text.to.equal("Odds: [91,273,479]")
+    "evenOddTest" : browser => {
+        functions.evenOddTest(browser, selector.selector, value)
+            
     },
-    'Filter Object functionality': browser => {
-        browser
-        .waitForElementVisible('input[name="objectFilterInput"]',3000)
-        .setValue('input[name="objectFilterInput"]',"title")
-        .click('button[name="objectFilterButton"]')
-        .expect.element('span[name="objectFilterResults').text.to.equal('Filtered: [ { "name": "Jimmy Joe", "title": "Hack0r", "age": 12 }, { "name": "Carly Armstrong", "title": "CEO" } ]')
-        
+    "filterObjectTest": browser => {
+        functions.filterObjectTest(browser, selector.selector, value)
+                
     },
     'Filter String functionality': browser => {
         browser
